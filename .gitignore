@@ -53,3 +53,5 @@ build*
 contrib-*
 install-*
 
+/contrib/native-build
+/native-build
