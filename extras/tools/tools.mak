@@ -319,21 +319,23 @@ CLEAN_FILE += .buildant
 
 # Protobuf Protoc
 
-protobuf-$(PROTOBUF_VERSION).tar.gz:
+protobuf-cpp-$(PROTOBUF_VERSION).tar.gz:
 	$(call download_pkg,$(PROTOBUF_URL),protobuf)
 
-protobuf: protobuf-$(PROTOBUF_VERSION).tar.gz
+protobuf: protobuf-cpp-$(PROTOBUF_VERSION).tar.gz
 	$(UNPACK)
-	$(MOVE)
+#	$(MOVE)
+#	dirty fix the archive doesn't follows convetionals name rules assumed in here ... 
+	mv protobuf-3.6.1 protobuf && touch protobuf
 
-.buildprotoc: protobuf
+.protoc: protobuf
 	(cd $< && ./configure --prefix="$(PREFIX)" --disable-shared --enable-static && $(MAKE) && $(MAKE) install)
 	(find $(PREFIX) -name 'protobuf*.pc' -exec rm -f {} \;)
 	touch $@
 
 CLEAN_PKG += protobuf
-DISTCLEAN_PKG += protobuf-$(PROTOBUF_VERSION).tar.gz
-CLEAN_FILE += .buildprotoc
+DISTCLEAN_PKG += protobuf-cpp-$(PROTOBUF_VERSION).tar.gz
+CLEAN_FILE += .protoc
 
 #
 # GNU bison
