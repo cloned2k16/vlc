@@ -328,7 +328,7 @@ protobuf: protobuf-cpp-$(PROTOBUF_VERSION).tar.gz
 #	dirty fix the archive doesn't follows convetionals name rules assumed in here ... 
 	mv protobuf-3.6.1 protobuf && touch protobuf
 
-.buildprotoc: protobuf
+.protoc: protobuf
 	(cd $< && ./configure --prefix="$(PREFIX)" --disable-shared --enable-static && $(MAKE) && $(MAKE) install)
 	(find $(PREFIX) -name 'protobuf*.pc' -exec rm -f {} \;)
 	touch $@
