@@ -192,8 +192,9 @@ done
 [ -n "$PACKAGES" ] && mkdir -p build/ && echo "To-be-built packages: $PACKAGES"
 
 cat >> Makefile << EOF
+include tools.mak
+
 all: $TARGETS
 	@echo "You are ready to build VLC and its contribs"
 
-include tools.mak
 EOF
